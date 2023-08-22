@@ -11,4 +11,9 @@ class UserRepository implements UserRepositoryContract
     {
         return User::create($data);
     }
+
+    public function findByEmail(string $email): User
+    {
+        return User::whereEmail($email)->first();
+    }
 }

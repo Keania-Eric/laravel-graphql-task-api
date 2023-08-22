@@ -19,6 +19,15 @@ type Query {
     ): [User!]! @paginate(defaultCount: 10)
 }
 
+input LoginInput @validator {
+  email: String!
+  password: String !
+}
+
+type AuthPayload {
+  token : String!
+}
+
 input CreateUserInput @validator {
     name : String!
     email : String!
@@ -27,7 +36,9 @@ input CreateUserInput @validator {
 }
 
 type Mutation {
+  login(input: LoginInput!) : AuthPayload! 
   registerUser(input: CreateUserInput!) : User! 
+
 }
 
 "Account of a person who utilizes this application."
