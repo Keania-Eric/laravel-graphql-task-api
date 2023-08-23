@@ -13,7 +13,6 @@ final class CreateTask
     public function __invoke($_, array $args)
     {
 
-    
         $input = $args['input'];
 
         $taskService = app(TaskService::class);
