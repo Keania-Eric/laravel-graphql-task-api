@@ -19,11 +19,11 @@ class TaskFactory extends Factory
     {
         return [
             //
-            'user_id'=> User::first()?->id ?? User::factory()->create()->id,
-            'title'=> $this->faker->sentence(6),
-            'description'=> $this->faker->paragraph(),
-            'due_date'=> $this->faker->dateTime($max="now"),
-            'status'=> $this->faker->randomElement(['Not Started', 'In Progress', 'Completed'])
+            'user_id' => User::first()?->id ?? User::factory()->create()->id,
+            'title' => $this->faker->sentence(6),
+            'description' => $this->faker->paragraph(),
+            'due_date' => $this->faker->dateTime($max = 'now'),
+            'status' => $this->faker->randomElement(['Not Started', 'In Progress', 'Completed']),
         ];
     }
 }

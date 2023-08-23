@@ -14,7 +14,7 @@ class UpdateTaskTest extends TestCase
     public function test_authenticated_user_can_update_task(): void
     {
         $user = User::factory()->create();
-        $task = Task::factory()->create(['user_id'=> $user->id]);
+        $task = Task::factory()->create(['user_id' => $user->id]);
         $title = 'Data Science with Kotlin & Numpy and Spring';
 
         $response = $this->actingAs($user, 'sanctum')->graphQL(/** @lang GraphQL */ '
@@ -33,7 +33,7 @@ class UpdateTaskTest extends TestCase
         ', [
             'title' => $title,
             'id' => $user->id,
-            'taskId'=> $task->id
+            'taskId' => $task->id,
         ]);
 
         $response->assertJson([
@@ -51,7 +51,7 @@ class UpdateTaskTest extends TestCase
     public function test_unauthenticated_user_cannot_update_task(): void
     {
         $user = User::factory()->create();
-        $task = Task::factory()->create(['user_id'=> $user->id]);
+        $task = Task::factory()->create(['user_id' => $user->id]);
         $title = 'Data Science with Kotlin & Numpy and Spring';
 
         $response = $this->graphQL(/** @lang GraphQL */ '
@@ -70,7 +70,7 @@ class UpdateTaskTest extends TestCase
         ', [
             'title' => $title,
             'id' => $user->id,
-            'taskId'=> $task->id
+            'taskId' => $task->id,
         ]);
 
         $response->assertGraphQLErrorMessage('Unauthenticated.');
@@ -79,7 +79,7 @@ class UpdateTaskTest extends TestCase
     public function test_authenticated_user_cannot_update_task_with_failed_validation(): void
     {
         $user = User::factory()->create();
-        $task = Task::factory()->create(['user_id'=> $user->id]);
+        $task = Task::factory()->create(['user_id' => $user->id]);
         $title = 'Data Science with Kotlin & Numpy and Spring';
 
         $response = $this->actingAs($user, 'sanctum')->graphQL(/** @lang GraphQL */ '
@@ -98,7 +98,7 @@ class UpdateTaskTest extends TestCase
         ', [
             'title' => $title,
             'id' => $user->id,
-            'taskId'=> $task->id
+            'taskId' => $task->id,
         ]);
 
         $response->assertGraphQLValidationError('input.description', 'The input.description field is required.');

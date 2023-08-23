@@ -1,13 +1,13 @@
 
 type Query {
     "Find a single task by an identifying attribute."
-    task( id: ID @eq): Task @find @guard(with: ["sanctum"])
+    task( id: ID @eq): Task @find @guard(with: ["sanctum"]) @can(ability: "view", resolved: true)
 
     "List multiple tasks."
     tasks(
       "Filters by title. Accepts SQL LIKE wildcards `%` and `_`."
       title: String @where(operator: "like")
-    ): [Task!]! @paginate(defaultCount: 10) @guard(with: ["sanctum"])
+    ): [Task!]! @paginate(defaultCount: 10) @guard(with: ["sanctum"]) @can(ability: "view", resolved: true)
 
     "Find a single user by an identifying attribute."
     user(
@@ -30,8 +30,8 @@ type Mutation {
   login(input: LoginInput!) : AuthPayload! 
   registerUser(input: CreateUserInput!) : User! 
    createTask(input: TaskPayload!): Task  @guard(with: ["sanctum"])
-updateTask(id: ID!, input: TaskPayload!): Task  @guard(with: ["sanctum"])
-deleteTask(id: ID!): Task @guard(with: ["sanctum"])
+    updateTask(id: ID!, input: TaskPayload!): Task  @guard(with: ["sanctum"])
+    deleteTask(id: ID!): Task @guard(with: ["sanctum"])
 }
 
 
