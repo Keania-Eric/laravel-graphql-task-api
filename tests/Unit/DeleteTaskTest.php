@@ -55,6 +55,4 @@ class DeleteTaskTest extends TestCase
 
         $response->assertGraphQLErrorMessage('Unauthenticated.');
     }
-
-    
 }
